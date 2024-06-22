@@ -4,9 +4,16 @@ import { Sakura } from "./sakura.js";
 
 function App() {
   useEffect(() => {
-    const sakura = new Sakura("#sakura-petals");
+    const sakura = new Sakura("#sakura-petals", {
+      maxSize: 30,
+      minSize: 14,
+    });
   }, []);
-  return <div id="sakura-petals"></div>;
+  return (
+    <>
+      <div id="sakura-petals"></div>
+    </>
+  );
 }
 
 export default App;

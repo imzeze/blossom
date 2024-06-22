@@ -136,21 +136,26 @@ export const Sakura = function Sakura(selector, options) {
     petal.classList.add(_this.settings.className);
     var height = randomInt(_this.settings.minSize, _this.settings.maxSize);
     var width = height - Math.floor(randomInt(0, _this.settings.minSize) / 3);
-    petal.style.background = "linear-gradient("
-      .concat(_this.settings.gradientColorDegree, "deg, ")
-      .concat(_this.settings.gradientColorStart, ", ")
-      .concat(_this.settings.gradientColorEnd, ")");
+    // petal.style.background = "linear-gradient("
+    //   .concat(_this.settings.gradientColorDegree, "deg, ")
+    //   .concat(_this.settings.gradientColorStart, ", ")
+    //   .concat(_this.settings.gradientColorEnd, ")");
     petal.style.webkitAnimation = animations;
     petal.style.animation = animations;
-    petal.style.borderRadius = ""
-      .concat(
-        randomInt(
-          _this.settings.maxSize,
-          _this.settings.maxSize + Math.floor(Math.random() * 10)
-        ),
-        "px "
-      )
-      .concat(randomInt(1, Math.floor(width / 4)), "px");
+    const image = document.createElement("img");
+    image.src = `/petals.png`;
+    image.style.objectFit = "contain";
+    petal.appendChild(image);
+    // petal.style.background = `url("petals.png")`;
+    // petal.style.borderRadius = ""
+    //   .concat(
+    //     randomInt(
+    //       _this.settings.maxSize,
+    //       _this.settings.maxSize + Math.floor(Math.random() * 10)
+    //     ),
+    //     "px "
+    //   )
+    //   .concat(randomInt(1, Math.floor(width / 4)), "px");
     petal.style.height = "".concat(height, "px");
     petal.style.left = "".concat(
       Math.random() * document.documentElement.clientWidth - 100,
