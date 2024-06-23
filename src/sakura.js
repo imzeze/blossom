@@ -27,7 +27,11 @@ export const Sakura = function Sakura(selector, options) {
     // The maximum size of the petal.
     minSize: 10,
     // The minimum size of the petal.
+<<<<<<< Updated upstream
     delay: 300,
+=======
+    delay: 1000,
+>>>>>>> Stashed changes
     // Delay between petals.
     gradientColorStart: "rgba(255, 183, 197, 0.9)",
     // Gradient color start (rgba).
@@ -192,7 +196,7 @@ Sakura.prototype.start = function () {
       window.requestAnimationFrame(this.createPetal)
     );
   } else {
-    throw new Error("Sakura is already running.");
+    return null;
   }
 };
 
