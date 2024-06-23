@@ -21,13 +21,13 @@ export const Sakura = function Sakura(selector, options) {
   var defaults = {
     className: "sakura",
     // Classname of the petal. This corresponds with the css.
-    fallSpeed: 1,
+    fallSpeed: 3,
     // Speed factor in which the petal falls.
     maxSize: 14,
     // The maximum size of the petal.
     minSize: 10,
     // The minimum size of the petal.
-    delay: 300,
+    delay: 1000,
     // Delay between petals.
     gradientColorStart: "rgba(255, 183, 197, 0.9)",
     // Gradient color start (rgba).
@@ -184,6 +184,7 @@ export const Sakura = function Sakura(selector, options) {
 };
 
 Sakura.prototype.start = function () {
+  var _this2 = this;
   var animId = this.el.dataset.sakuraAnimId;
 
   if (!animId) {
@@ -191,8 +192,14 @@ Sakura.prototype.start = function () {
       "data-sakura-anim-id",
       window.requestAnimationFrame(this.createPetal)
     );
+
+    var petals = document.getElementsByClassName(_this2.settings.className);
+    for (let i = 0; i < petals.length; i++) {
+      petals[i].style["animation-play-state"] = "running";
+    }
   } else {
-    throw new Error("Sakura is already running.");
+    return null;
+    // throw new Error("Sakura is already running.");
   }
 };
 
@@ -206,6 +213,18 @@ Sakura.prototype.stop = function () {
   if (animId) {
     window.cancelAnimationFrame(animId);
     this.el.setAttribute("data-sakura-anim-id", "");
+
+    var petals = document.getElementsByClassName(_this2.settings.className);
+    for (let i = 0; i < petals.length; i++) {
+      petals[i].style["animation-play-state"] = "paused";
+    }
+
+    setTimeout(() => {
+      var petals = document.getElementsByClassName(_this2.settings.className);
+      for (let i = 0; i < petals.length; i++) {
+        petals[i].style["animation-play-state"] = "paused";
+      }
+    }, [1000]);
   } // Remove all current blossoms at once.
   // You can also set 'graceful' to true to stop new petals from being created.
   // This way the petals won't be removed abruptly.
@@ -213,7 +232,6 @@ Sakura.prototype.stop = function () {
   if (!graceful) {
     setTimeout(function () {
       var petals = document.getElementsByClassName(_this2.settings.className);
-
       while (petals.length > 0) {
         petals[0].parentNode.removeChild(petals[0]);
       }
