@@ -23,11 +23,11 @@ export const Sakura = function Sakura(selector, options) {
     // Classname of the petal. This corresponds with the css.
     fallSpeed: 1,
     // Speed factor in which the petal falls.
-    maxSize: 14,
+    maxSize: 32,
     // The maximum size of the petal.
-    minSize: 10,
+    minSize: 16,
     // The minimum size of the petal.
-    delay: 300,
+    delay: 2000,
     // Delay between petals.
     gradientColorStart: "rgba(255, 183, 197, 0.9)",
     // Gradient color start (rgba).
@@ -51,7 +51,7 @@ export const Sakura = function Sakura(selector, options) {
   this.el.style.overflowX = "hidden"; // Random array element
 
   function randomArrayElem(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+    return arr[Math.floor(Math.random() * arr.length)]; // 꽃잎 휘어진 방향
   } // Random integer
 
   function randomInt(min, max) {
